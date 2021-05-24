@@ -1,8 +1,8 @@
 #------------------------------------------------------------------------
 #
-#   community detection 
 # 
-#   2019-03-11
+# Since the smart work solution used by the company basically plays the role of a collaboration tool, 
+# it analyzes the collaboration relationship between employees using graph analysis and derives important nodes (employees).
 #
 #------------------------------------------------------------------------
 install.packages(c('tidygraph','ggraph'))
