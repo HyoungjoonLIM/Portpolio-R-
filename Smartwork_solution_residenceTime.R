@@ -20,16 +20,16 @@ data_o <- read.csv("raw_20201207.csv")
 date <- c("19-12","20-01","20-02","20-03","20-10","20-11",
           "20-04","20-05","20-06","20-07","20-08","20-09")
 
-data <- subset(data_o, substr(data_o$È°µ¿ÀÏÀÚ,1,7)==paste0("20",date[k]))
-data <- subset(data, data$È°µ¿À¯Çü!="±âÅ¸")
+data <- subset(data_o, substr(data_o$í™œë™ì¼ì,1,7)==paste0("20",date[k]))
+data <- subset(data, data$í™œë™ìœ í˜•!="ê¸°íƒ€")
 
-list <- unique(data$È°µ¿µî·ÏÀÚ»ç¿ø¹øÈ£)
+list <- unique(data$í™œë™ë“±ë¡ìì‚¬ì›ë²ˆí˜¸)
 
 data$label <- 2 # reply
 data[data$activity=="change status of job card",]$label <- 4
-data[data$È°µ¿À¯Çü=="add job card",]$label <- 3
-data[data$È°µ¿À¯Çü=="login",]$label <- 1
-data[data$È°µ¿À¯Çü=="instruct",]$label <- 5
+data[data$í™œë™ìœ í˜•=="add job card",]$label <- 3
+data[data$í™œë™ìœ í˜•=="login",]$label <- 1
+data[data$í™œë™ìœ í˜•=="instruct",]$label <- 5
 
 #summary(as.factor(data$label))
 
