@@ -7,24 +7,24 @@ library(stringr)
 install.packages("gdata")
 library(gdata)
 
-setwd("E:/ÇĞ»ıµ¥ÀÌÅÍ ºĞ¼®/2017/DTW_SEM(180418)/result_dtw")
+setwd("E:/í•™ìƒë°ì´í„° ë¶„ì„/2017/DTW_SEM(180418)/result_dtw")
 traj <- read.csv("all_data(2017_1,2).csv")
 traj$X <- NULL
 traj1 <- subset(traj, substr(traj$Date,6,7) == "03" | substr(traj$Date,6,7) == "04" |
-                  substr(traj$Date,6,7) == "05" | substr(traj$Date,6,7) == "06") # 1ÇĞ±â
+                  substr(traj$Date,6,7) == "05" | substr(traj$Date,6,7) == "06") # 1í•™ê¸°
 gpa1 <- read.csv("17-1gpa.csv")
 survey1 <- read.csv("survey1.csv")
 survey2 <- read.csv("survey22.csv")
-survey_gpa1 <- sqldf("SELECT gpa1.GPA, survey1.* FROM gpa1, survey1 WHERE gpa1.id = survey1.º¯È¯ÇĞ¹ø")
+survey_gpa1 <- sqldf("SELECT gpa1.GPA, survey1.* FROM gpa1, survey1 WHERE gpa1.id = survey1.ë³€í™˜í•™ë²ˆ")
 colnames(survey_gpa1)[2] <- "id"
-survey_gpa1 <- sqldf("SELECT survey2.*, survey_gpa1.* FROM survey2, survey_gpa1 WHERE survey2.º¯È¯ÇĞ¹ø = survey_gpa1.id")
+survey_gpa1 <- sqldf("SELECT survey2.*, survey_gpa1.* FROM survey2, survey_gpa1 WHERE survey2.ë³€í™˜í•™ë²ˆ = survey_gpa1.id")
 survey_gpa1[,1] <- NULL
 
 gpa2 <- read.csv("17-2gpa.csv")
 colnames(gpa2) <- c("id", "GPA")
-survey_gpa2 <- sqldf("SELECT gpa2.GPA, survey1.* FROM gpa2, survey1 WHERE gpa2.id = survey1.º¯È¯ÇĞ¹ø")
+survey_gpa2 <- sqldf("SELECT gpa2.GPA, survey1.* FROM gpa2, survey1 WHERE gpa2.id = survey1.ë³€í™˜í•™ë²ˆ")
 colnames(survey_gpa2)[2] <- "id"
-survey_gpa2 <- sqldf("SELECT survey2.*, survey_gpa2.* FROM survey2, survey_gpa2 WHERE survey2.º¯È¯ÇĞ¹ø = survey_gpa2.id")
+survey_gpa2 <- sqldf("SELECT survey2.*, survey_gpa2.* FROM survey2, survey_gpa2 WHERE survey2.ë³€í™˜í•™ë²ˆ = survey_gpa2.id")
 survey_gpa2[,1] <- NULL
 
 log1 <- read.csv("log1_converted.csv")
@@ -32,7 +32,7 @@ log1 <- sqldf("SELECT log1.* FROM log1, survey_gpa1 WHERE log1.virID = survey_gp
 traj1 <- sqldf("SELECT traj1.* FROM traj1, survey_gpa1 WHERE traj1.Stu_id = survey_gpa1.id")
 
 traj2 <- subset(traj, substr(traj$Date,6,7) == "09" | substr(traj$Date,6,7) == "10" |
-                  substr(traj$Date,6,7) == "11" | substr(traj$Date,6,7) == "12") # 2ÇĞ±â
+                  substr(traj$Date,6,7) == "11" | substr(traj$Date,6,7) == "12") # 2í•™ê¸°
 traj2 <- sqldf("SELECT traj2.* FROM traj2, survey_gpa2 WHERE traj2.Stu_id = survey_gpa2.id")
 log2 <- read.csv("log2_converted.csv")
 log2 <- sqldf("SELECT log2.* FROM log2, survey_gpa2 WHERE log2.virID = survey_gpa2.id")
@@ -117,14 +117,14 @@ survey_gpa2 <- sqldf("SELECT survey_gpa2.*, TIME_cum2.time_cum FROM survey_gpa2,
 survey_gpa2$time_avg <- survey_gpa2$time_avg/3600
 survey_gpa2$time_cum <- survey_gpa2$time_cum/3600
 
-setwd("E:/ÇĞ»ıµ¥ÀÌÅÍ ºĞ¼®")
+setwd("E:/í•™ìƒë°ì´í„° ë¶„ì„")
 all1 <- read.csv("all_data(2016_1).csv")
 all2 <- read.csv("all_data(2016_2).csv")
 all17 <- read.csv("all_data(2017_1,2).csv")
 all171 <- subset(all17, substr(all17$Date,6,7) == "03" | substr(all17$Date,6,7) == "04" |
-                       substr(all17$Date,6,7) == "05" | substr(all17$Date,6,7) == "06") # 1ÇĞ±â
+                       substr(all17$Date,6,7) == "05" | substr(all17$Date,6,7) == "06") # 1í•™ê¸°
 all172 <- subset(all17, substr(all17$Date,6,7) == "09" | substr(all17$Date,6,7) == "10" |
-                   substr(all17$Date,6,7) == "11" | substr(all17$Date,6,7) == "12") # 1ÇĞ±â
+                   substr(all17$Date,6,7) == "11" | substr(all17$Date,6,7) == "12") # 1í•™ê¸°
 
 # Categorizing 1 to 4
 all1_o <- all1
@@ -171,7 +171,7 @@ sort(unique(all2$Category_id))
 sort(unique(all171$Category_id))
 sort(unique(all172$Category_id))
 
-setwd("E:/ÇĞ»ıµ¥ÀÌÅÍ ºĞ¼®/2017/DTW_SEM(180418)/result_dtw/201905_all")
+setwd("E:/í•™ìƒë°ì´í„° ë¶„ì„/2017/DTW_SEM(180418)/result_dtw/201905_all")
 res161 <- read.csv("clustering_result161_all(c=3_5).csv", header=F)
 res162 <- read.csv("clustering_result162_all(c=3_5).csv", header=F)
 res171 <- read.csv("clustering_result171_all(c=3_8).csv", header=F)
@@ -428,7 +428,7 @@ ggRadar(data = s_data2, groupvar="students")
 
 ####################### ANOVA #####################
 
-setwd("E:/ÇĞ»ıµ¥ÀÌÅÍ ºĞ¼®/2017/DTW_SEM(180418)/result_dtw/201812_engmale")
+setwd("E:/í•™ìƒë°ì´í„° ë¶„ì„/2017/DTW_SEM(180418)/result_dtw/201812_engmale")
 FIN_gpa161_engmale <- read.csv("FIN_gpa161_engmale1234.csv")
 FIN_gpa162_engmale <- read.csv("FIN_gpa162_engmale1234.csv")
 FIN_gpa171_engmale <- read.csv("FIN_gpa171_engmale1234.csv")
@@ -441,7 +441,7 @@ res <- anova(ainput2)
 res
 res172_engmale <- res$`Pr(>F)`
 
-setwd("E:/ÇĞ»ıµ¥ÀÌÅÍ ºĞ¼®/2017/DTW_SEM(180418)/result_dtw/201812_engfem")
+setwd("E:/í•™ìƒë°ì´í„° ë¶„ì„/2017/DTW_SEM(180418)/result_dtw/201812_engfem")
 FIN_gpa161_engfem <- read.csv("FIN_gpa161_engfem1234.csv")
 FIN_gpa162_engfem <- read.csv("FIN_gpa162_engfem1234.csv")
 FIN_gpa171_engfem <- read.csv("FIN_gpa171_engfem1234.csv")
@@ -454,7 +454,7 @@ res <- anova(ainput2)
 res
 res172_engfem <- res$`Pr(>F)`
 
-setwd("E:/ÇĞ»ıµ¥ÀÌÅÍ ºĞ¼®/2017/DTW_SEM(180418)/result_dtw/201812_libmale")
+setwd("E:/í•™ìƒë°ì´í„° ë¶„ì„/2017/DTW_SEM(180418)/result_dtw/201812_libmale")
 FIN_gpa161_libmale <- read.csv("FIN_gpa161_libmale1234.csv")
 FIN_gpa162_libmale <- read.csv("FIN_gpa162_libmale1234.csv")
 FIN_gpa171_libmale <- read.csv("FIN_gpa171_libmale1234.csv")
@@ -467,7 +467,7 @@ res <- anova(ainput2)
 res
 res172_libmale <- res$`Pr(>F)`
 
-setwd("E:/ÇĞ»ıµ¥ÀÌÅÍ ºĞ¼®/2017/DTW_SEM(180418)/result_dtw/201812_libfem")
+setwd("E:/í•™ìƒë°ì´í„° ë¶„ì„/2017/DTW_SEM(180418)/result_dtw/201812_libfem")
 FIN_gpa161_libfem <- read.csv("FIN_gpa161_libfem1234.csv")
 FIN_gpa162_libfem <- read.csv("FIN_gpa162_libfem1234.csv")
 FIN_gpa171_libfem <- read.csv("FIN_gpa171_libfem1234.csv")
@@ -480,7 +480,7 @@ res <- anova(ainput2)
 res
 res172_libfem <- res$`Pr(>F)`
 
-setwd("E:/ÇĞ»ıµ¥ÀÌÅÍ ºĞ¼®/2017/DTW_SEM(180418)/result_dtw/201812_natmale")
+setwd("E:/í•™ìƒë°ì´í„° ë¶„ì„/2017/DTW_SEM(180418)/result_dtw/201812_natmale")
 FIN_gpa161_natmale <- read.csv("FIN_gpa161_natmale1234.csv")
 FIN_gpa162_natmale <- read.csv("FIN_gpa162_natmale1234.csv")
 FIN_gpa171_natmale <- read.csv("FIN_gpa171_natmale1234.csv")
@@ -493,7 +493,7 @@ res <- anova(ainput2)
 res
 res172_natmale <- res$`Pr(>F)`
 
-setwd("E:/ÇĞ»ıµ¥ÀÌÅÍ ºĞ¼®/2017/DTW_SEM(180418)/result_dtw/201812_natfem")
+setwd("E:/í•™ìƒë°ì´í„° ë¶„ì„/2017/DTW_SEM(180418)/result_dtw/201812_natfem")
 FIN_gpa161_natfem <- read.csv("FIN_gpa161_natfem1234.csv")
 FIN_gpa162_natfem <- read.csv("FIN_gpa162_natfem1234.csv")
 FIN_gpa171_natfem <- read.csv("FIN_gpa171_natfem1234.csv")
@@ -506,7 +506,7 @@ res <- anova(ainput2)
 res
 res172_natfem <- res$`Pr(>F)`
 
-setwd("E:/ÇĞ»ıµ¥ÀÌÅÍ ºĞ¼®/2017/DTW_SEM(180418)/result_dtw/201905_all")
+setwd("E:/í•™ìƒë°ì´í„° ë¶„ì„/2017/DTW_SEM(180418)/result_dtw/201905_all")
 FIN_gpa161_all <- read.csv("FIN_gpa161_all.csv")
 FIN_gpa162_all <- read.csv("FIN_gpa162_all.csv")
 FIN_gpa171_all <- read.csv("FIN_gpa171_all.csv")
@@ -531,7 +531,7 @@ res_anova_all <- c(res161_all[1], res162_all[1], res171_all[1], res172_all[1])
 res_anova <- data.frame(rbind(res_anova_engmale, res_anova_engfem, res_anova_libmale, res_anova_libfem, 
                               res_anova_natmale, res_anova_natfem, res_anova_all))
 colnames(res_anova) <- c("16-1", "16-2", "17-1", "17-2")
-setwd("E:/ÇĞ»ıµ¥ÀÌÅÍ ºĞ¼®/2017/DTW_SEM(180418)/result_dtw/")
+setwd("E:/í•™ìƒë°ì´í„° ë¶„ì„/2017/DTW_SEM(180418)/result_dtw/")
 write.csv(res_anova, "result_anova.csv", row.names = F)
 
 
@@ -564,28 +564,28 @@ mean(clu4_4$A1_10) # hobby
 mean(clu4_4$time_cum)
 mean(clu4_4$time_avg)
 
-#mean(mean(clu4_4$A3_1),mean(clu4_4$A3_2)) #»çÈ¸¼º
+#mean(mean(clu4_4$A3_1),mean(clu4_4$A3_2)) #ì‚¬íšŒì„±
 (summary(clu4_4$E1_1)[2]*0.5 + summary(clu4_4$E1_1)[3]*3 
-  + summary(clu4_4$E1_1)[4]*10 + summary(clu4_4$E1_1)[5]*12)/nrow(clu4_4) #À½ÁÖÈ½¼ö/°³¿ù 
+  + summary(clu4_4$E1_1)[4]*10 + summary(clu4_4$E1_1)[5]*12)/nrow(clu4_4) #ìŒì£¼íšŸìˆ˜/ê°œì›” 
 
 (summary(clu4_4$E1_2)[1]*1.5 + summary(clu4_4$E1_2)[2]*3.5 + summary(clu4_4$E1_2)[3]*5.5 
-  + summary(clu4_4$E1_2)[4]*8 + summary(clu4_4$E1_2)[5]*10)/nrow(clu4_4) #¸î ÀÜ? 
+  + summary(clu4_4$E1_2)[4]*8 + summary(clu4_4$E1_2)[5]*10)/nrow(clu4_4) #ëª‡ ì”? 
 
 (summary(clu4_4$E1_3)[2]*0.5 + summary(clu4_4$E1_3)[3]*1 
-  + summary(clu4_4$E1_3)[4]*4 + summary(clu4_4$E1_3)[5]*8)/nrow(clu4_4) #°úÀ½È½¼ö/°³¿ù 
+  + summary(clu4_4$E1_3)[4]*4 + summary(clu4_4$E1_3)[5]*8)/nrow(clu4_4) #ê³¼ìŒíšŸìˆ˜/ê°œì›” 
 
 (summary(clu4_4$E1_4)[1]*5 + summary(clu4_4$E1_4)[2]*15
-  + summary(clu4_4$E1_4)[3]*25 + summary(clu4_4$E1_4)[4]*35)/nrow(clu4_4)#Èí¿¬ : °³ºñ/ÀÏ 
+  + summary(clu4_4$E1_4)[3]*25 + summary(clu4_4$E1_4)[4]*35)/nrow(clu4_4)#í¡ì—° : ê°œë¹„/ì¼ 
 
 (summary(clu4_4$E1_5)[1]*0.5 + summary(clu4_4$E1_5)[2]*1.5 + summary(clu4_4$E1_5)[3]*2.5 + summary(clu4_4$E1_5)[4]*3.5
   + summary(clu4_4$E1_5)[5]*4.5 + summary(clu4_4$E1_5)[6]*5.5 + summary(clu4_4$E1_5)[7]*8 + summary(clu4_4$E1_5)[8]*10)/nrow(clu4_4)
 
-mean(clu4_4$E1_6) # ÀÎÅÍ³İ »ç¿ë ¶§¹®¿¡ ¹æÇØ¹ŞÀº Á¤µµ
+mean(clu4_4$E1_6) # ì¸í„°ë„· ì‚¬ìš© ë•Œë¬¸ì— ë°©í•´ë°›ì€ ì •ë„
 mean(mean(clu4_4$E1_7),mean(clu4_4$E1_8),mean(clu4_4$E1_9)) # sexual knowledge
 
-mean(clu4_4$E3_3-clu4_4$E3_4) # ¿ÜÇâ¼º 
-mean(clu4_4$E3_5+clu4_4$E4_1-clu4_4$E4_2) # Çàº¹°¨  
-summary(clu4_4$Q2_1_4)[2]*100/nrow(clu4_4) # ±â¼÷»ç °æÇè ¿©ºÎ
+mean(clu4_4$E3_3-clu4_4$E3_4) # ì™¸í–¥ì„± 
+mean(clu4_4$E3_5+clu4_4$E4_1-clu4_4$E4_2) # í–‰ë³µê°  
+summary(clu4_4$Q2_1_4)[2]*100/nrow(clu4_4) # ê¸°ìˆ™ì‚¬ ê²½í—˜ ì—¬ë¶€
 
 
 rm(clu4_4)
@@ -644,17 +644,17 @@ t.test(clu4_3$A1_10, clu4_4$A1_10)$p.value #pval_hob
 t.test(clu4_3$time_cum, clu4_4$time_cum)$p.value #pval_timecum
 t.test(clu4_3$time_avg, clu4_4$time_avg)$p.value #pval_timeavg
 
-t.test(clu4_3$E1_1c, clu4_4$E1_1c)$p.value #pval_À½ÁÖÈ½¼ö
-t.test(clu4_3$E1_2c, clu4_4$E1_2c)$p.value #pval_¸îÀÜ
-t.test(clu4_3$E1_3c, clu4_4$E1_3c)$p.value #pval_°úÀ½È½¼ö
-t.test(clu4_3$E1_4c, clu4_4$E1_4c)$p.value #pval_°³ºñ
-t.test(clu4_3$E1_5c, clu4_4$E1_5c)$p.value #pval_ÀÏº° ÀÎÅÍ³İ »ç¿ë½Ã°£ 
+t.test(clu4_3$E1_1c, clu4_4$E1_1c)$p.value #pval_ìŒì£¼íšŸìˆ˜
+t.test(clu4_3$E1_2c, clu4_4$E1_2c)$p.value #pval_ëª‡ì”
+t.test(clu4_3$E1_3c, clu4_4$E1_3c)$p.value #pval_ê³¼ìŒíšŸìˆ˜
+t.test(clu4_3$E1_4c, clu4_4$E1_4c)$p.value #pval_ê°œë¹„
+t.test(clu4_3$E1_5c, clu4_4$E1_5c)$p.value #pval_ì¼ë³„ ì¸í„°ë„· ì‚¬ìš©ì‹œê°„ 
 
 t.test(clu4_3$E1_6, clu4_4$E1_6)$p.value #pval_internet interruption
 t.test(colMeans(rbind(clu4_3$E1_7,clu4_3$E1_8,clu4_3$E1_9)), colMeans(rbind(clu4_4$E1_7,clu4_4$E1_8,clu4_4$E1_9)))$p.value #pval_sexual
 
-t.test(clu4_3$E3_3-clu4_3$E3_4, clu4_4$E3_3-clu4_4$E3_4)$p.value #pval_¿ÜÇâ¼º 
-t.test(clu4_3$E3_5+clu4_3$E4_1-clu4_3$E4_2, clu4_4$E3_5+clu4_4$E4_1-clu4_4$E4_2)$p.value #pval_Çàº¹°¨ 
+t.test(clu4_3$E3_3-clu4_3$E3_4, clu4_4$E3_3-clu4_4$E3_4)$p.value #pval_ì™¸í–¥ì„± 
+t.test(clu4_3$E3_5+clu4_3$E4_1-clu4_3$E4_2, clu4_4$E3_5+clu4_4$E4_1-clu4_4$E4_2)$p.value #pval_í–‰ë³µê° 
 
 
 rm(clu4_4, clu4_4, clu5_1)
@@ -710,17 +710,17 @@ t.test(clu4_3$A1_10, clu4_4$A1_10)$p.value #pval_hob
 t.test(clu4_3$time_cum, clu4_4$time_cum)$p.value #pval_timecum
 t.test(clu4_3$time_avg, clu4_4$time_avg)$p.value #pval_timeavg
 
-t.test(clu4_3$E1_1c, clu4_4$E1_1c)$p.value #pval_À½ÁÖÈ½¼ö
-t.test(clu4_3$E1_2c, clu4_4$E1_2c)$p.value #pval_¸îÀÜ
-t.test(clu4_3$E1_3c, clu4_4$E1_3c)$p.value #pval_°úÀ½È½¼ö
-t.test(clu4_3$E1_4c, clu4_4$E1_4c)$p.value #pval_°³ºñ
-t.test(clu4_3$E1_5c, clu4_4$E1_5c)$p.value #pval_ÀÏº° ÀÎÅÍ³İ »ç¿ë½Ã°£ 
+t.test(clu4_3$E1_1c, clu4_4$E1_1c)$p.value #pval_ìŒì£¼íšŸìˆ˜
+t.test(clu4_3$E1_2c, clu4_4$E1_2c)$p.value #pval_ëª‡ì”
+t.test(clu4_3$E1_3c, clu4_4$E1_3c)$p.value #pval_ê³¼ìŒíšŸìˆ˜
+t.test(clu4_3$E1_4c, clu4_4$E1_4c)$p.value #pval_ê°œë¹„
+t.test(clu4_3$E1_5c, clu4_4$E1_5c)$p.value #pval_ì¼ë³„ ì¸í„°ë„· ì‚¬ìš©ì‹œê°„ 
 
 t.test(clu4_3$E1_6, clu4_4$E1_6)$p.value #pval_internet interruption
 t.test(colMeans(rbind(clu4_3$E1_7,clu4_3$E1_8,clu4_3$E1_9)), colMeans(rbind(clu4_4$E1_7,clu4_4$E1_8,clu4_4$E1_9)))$p.value #pval_sexual
 
-t.test(clu4_3$E3_3-clu4_3$E3_4, clu4_4$E3_3-clu4_4$E3_4)$p.value #pval_¿ÜÇâ¼º 
-t.test(clu4_3$E3_5+clu4_3$E4_1-clu4_3$E4_2, clu4_4$E3_5+clu4_4$E4_1-clu4_4$E4_2)$p.value #pval_Çàº¹°¨ 
+t.test(clu4_3$E3_3-clu4_3$E3_4, clu4_4$E3_3-clu4_4$E3_4)$p.value #pval_ì™¸í–¥ì„± 
+t.test(clu4_3$E3_5+clu4_3$E4_1-clu4_3$E4_2, clu4_4$E3_5+clu4_4$E4_1-clu4_4$E4_2)$p.value #pval_í–‰ë³µê° 
 
 
 
