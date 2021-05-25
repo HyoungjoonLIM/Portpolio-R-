@@ -15,72 +15,72 @@ library(dplyr)
 library(datasets)
 rm(list=ls())
 
-setwd("D:/Desktop/¸¶ÀÌ¿öÅ© ºĞ¼®/rawdata/210125")
+setwd("D:/Desktop/ë§ˆì´ì›Œí¬ ë¶„ì„/rawdata/210125")
 
 # Data preparation
-act <- read.csv("¾×Æ¼ºñÆ¼raw_210304.csv")
-upmu <- read.csv("¾÷¹«µî·Ïraw_210304.csv")
-weekly <- read.csv("ÁÖ°£º¸°íraw_210304.csv")
-alrm <- read.csv("¾Ë¸²¼ö½Åraw_210304.csv")
+act <- read.csv("ì•¡í‹°ë¹„í‹°raw_210304.csv")
+upmu <- read.csv("ì—…ë¬´ë“±ë¡raw_210304.csv")
+weekly <- read.csv("ì£¼ê°„ë³´ê³ raw_210304.csv")
+alrm <- read.csv("ì•Œë¦¼ìˆ˜ì‹ raw_210304.csv")
 
-mob <- read.csv("¸ğ¹ÙÀÏraw_210304.csv")
-sebu_inst <- read.csv("¼¼ºÎ¾÷¹«Áö½Ãraw_210304.csv")
-upmu_inst <- read.csv("¾÷¹«Áö½Ãraw_210304.csv")
+mob <- read.csv("ëª¨ë°”ì¼raw_210304.csv")
+sebu_inst <- read.csv("ì„¸ë¶€ì—…ë¬´ì§€ì‹œraw_210304.csv")
+upmu_inst <- read.csv("ì—…ë¬´ì§€ì‹œraw_210304.csv")
 
-summary(as.factor(act$¾×Æ¼ºñÆ¼À¯Çü¸í))
+summary(as.factor(act$ì•¡í‹°ë¹„í‹°ìœ í˜•ëª…))
 
 temp <- weekdays(as.Date(sebu$date,"%Y-%m-%d"))
 
 # 1. alarm
 
-#alrm$label <- paste0("¾Ë¶÷¼ö½Å(",alrm$¾Ë¸²±¸ºĞÄÚµå¸í,")")
-alrm$label <- "¾Ë¶÷¼ö½Å"
+#alrm$label <- paste0("ì•ŒëŒìˆ˜ì‹ (",alrm$ì•Œë¦¼êµ¬ë¶„ì½”ë“œëª…,")")
+alrm$label <- "ì•ŒëŒìˆ˜ì‹ "
 alrm <- alrm[,-10]
 colnames(alrm) <- c("date","time","name","ID",
                     "b_lev","c_lev","d_lev",
                     "rank","duty","label")
 
 # 2. sebu
-sebu_inst$label <- "¼¼ºÎ¾÷¹«Áö½Ã"
+sebu_inst$label <- "ì„¸ë¶€ì—…ë¬´ì§€ì‹œ"
 colnames(sebu_inst) <- c("date","time","name","ID",
                     "b_lev","c_lev","d_lev",
                     "rank","duty","label")
 
 # 3. upmu
-upmu$label <- "¾÷¹«µî·Ï"
+upmu$label <- "ì—…ë¬´ë“±ë¡"
 colnames(upmu) <- c("date","time","name","ID",
                     "b_lev","c_lev","d_lev",
                     "rank","duty","label")
-upmu_inst$label <- "¾÷¹«Áö½Ã"
+upmu_inst$label <- "ì—…ë¬´ì§€ì‹œ"
 colnames(upmu_inst) <- c("date","time","name","ID",
                     "b_lev","c_lev","d_lev",
                     "rank","duty","label")
 
 # 4. weekly
-weekly$label <- "ÁÖ°£º¸°íÁ¦Ãâ"
+weekly$label <- "ì£¼ê°„ë³´ê³ ì œì¶œ"
 colnames(weekly) <- c("date","time","name","ID","label")
 
 # 5. activity
-act$label <- act$¾×Æ¼ºñÆ¼À¯Çü¸í
-act[act$¾×Æ¼ºñÆ¼À¯Çü¸í=="¾÷¹«ÀÏÁ¤",]$label <- "ÀÏÁ¤µî·Ï"
-act[act$¾×Æ¼ºñÆ¼À¯Çü¸í=="½Ã½ºÅÛ"&
-    grepl("¾÷¹«¸¦ Ãß°¡", act$¾×Æ¼ºñÆ¼³»¿ë),]$label <- "¼¼ºÎ¾÷¹«Ãß°¡"
-act[act$¾×Æ¼ºñÆ¼À¯Çü¸í=="½Ã½ºÅÛ"&
-    grepl("'ToDo' »óÅÂ¿¡¼­ 'Doing'", act$¾×Æ¼ºñÆ¼³»¿ë),]$label <- "»óÅÂº¯°æToDoDoing"
-act[act$¾×Æ¼ºñÆ¼À¯Çü¸í=="½Ã½ºÅÛ"&
-    grepl("'Doing' »óÅÂ¿¡¼­ 'Done'", act$¾×Æ¼ºñÆ¼³»¿ë),]$label <- "»óÅÂº¯°æDoingDone"
-act[act$¾×Æ¼ºñÆ¼À¯Çü¸í=="½Ã½ºÅÛ"&
-    grepl("'ToDo' »óÅÂ¿¡¼­ 'Done'", act$¾×Æ¼ºñÆ¼³»¿ë),]$label <- "»óÅÂº¯°æToDoDone"
-act[act$¾×Æ¼ºñÆ¼À¯Çü¸í=="½Ã½ºÅÛ"&
-    grepl("'Done' »óÅÂ¿¡¼­ 'Doing'", act$¾×Æ¼ºñÆ¼³»¿ë),]$label <- "»óÅÂº¯°æDoneDoing"
-act[act$¾×Æ¼ºñÆ¼À¯Çü¸í=="½Ã½ºÅÛ"&
-    grepl("'Done' »óÅÂ¿¡¼­ 'ToDo'", act$¾×Æ¼ºñÆ¼³»¿ë),]$label <- "»óÅÂº¯°æDoneToDo"
-act[act$¾×Æ¼ºñÆ¼À¯Çü¸í=="½Ã½ºÅÛ"&
-    grepl("'Doing' »óÅÂ¿¡¼­ 'ToDo'", act$¾×Æ¼ºñÆ¼³»¿ë),]$label <- "»óÅÂº¯°æDoingToDo"
-act[act$¾×Æ¼ºñÆ¼À¯Çü¸í=="½Ã½ºÅÛ"&
-    grepl("¾÷¹«¸¦ Áö½Ã", act$¾×Æ¼ºñÆ¼³»¿ë),]$label <- "¼¼ºÎ¾÷¹«Áö½Ã"
-act <- subset(act, act$label != "¼¼ºÎ¾÷¹«Áö½Ã")
-act <- subset(act, act$label != "½Ã½ºÅÛ")
+act$label <- act$ì•¡í‹°ë¹„í‹°ìœ í˜•ëª…
+act[act$ì•¡í‹°ë¹„í‹°ìœ í˜•ëª…=="ì—…ë¬´ì¼ì •",]$label <- "ì¼ì •ë“±ë¡"
+act[act$ì•¡í‹°ë¹„í‹°ìœ í˜•ëª…=="ì‹œìŠ¤í…œ"&
+    grepl("ì—…ë¬´ë¥¼ ì¶”ê°€", act$ì•¡í‹°ë¹„í‹°ë‚´ìš©),]$label <- "ì„¸ë¶€ì—…ë¬´ì¶”ê°€"
+act[act$ì•¡í‹°ë¹„í‹°ìœ í˜•ëª…=="ì‹œìŠ¤í…œ"&
+    grepl("'ToDo' ìƒíƒœì—ì„œ 'Doing'", act$ì•¡í‹°ë¹„í‹°ë‚´ìš©),]$label <- "ìƒíƒœë³€ê²½ToDoDoing"
+act[act$ì•¡í‹°ë¹„í‹°ìœ í˜•ëª…=="ì‹œìŠ¤í…œ"&
+    grepl("'Doing' ìƒíƒœì—ì„œ 'Done'", act$ì•¡í‹°ë¹„í‹°ë‚´ìš©),]$label <- "ìƒíƒœë³€ê²½DoingDone"
+act[act$ì•¡í‹°ë¹„í‹°ìœ í˜•ëª…=="ì‹œìŠ¤í…œ"&
+    grepl("'ToDo' ìƒíƒœì—ì„œ 'Done'", act$ì•¡í‹°ë¹„í‹°ë‚´ìš©),]$label <- "ìƒíƒœë³€ê²½ToDoDone"
+act[act$ì•¡í‹°ë¹„í‹°ìœ í˜•ëª…=="ì‹œìŠ¤í…œ"&
+    grepl("'Done' ìƒíƒœì—ì„œ 'Doing'", act$ì•¡í‹°ë¹„í‹°ë‚´ìš©),]$label <- "ìƒíƒœë³€ê²½DoneDoing"
+act[act$ì•¡í‹°ë¹„í‹°ìœ í˜•ëª…=="ì‹œìŠ¤í…œ"&
+    grepl("'Done' ìƒíƒœì—ì„œ 'ToDo'", act$ì•¡í‹°ë¹„í‹°ë‚´ìš©),]$label <- "ìƒíƒœë³€ê²½DoneToDo"
+act[act$ì•¡í‹°ë¹„í‹°ìœ í˜•ëª…=="ì‹œìŠ¤í…œ"&
+    grepl("'Doing' ìƒíƒœì—ì„œ 'ToDo'", act$ì•¡í‹°ë¹„í‹°ë‚´ìš©),]$label <- "ìƒíƒœë³€ê²½DoingToDo"
+act[act$ì•¡í‹°ë¹„í‹°ìœ í˜•ëª…=="ì‹œìŠ¤í…œ"&
+    grepl("ì—…ë¬´ë¥¼ ì§€ì‹œ", act$ì•¡í‹°ë¹„í‹°ë‚´ìš©),]$label <- "ì„¸ë¶€ì—…ë¬´ì§€ì‹œ"
+act <- subset(act, act$label != "ì„¸ë¶€ì—…ë¬´ì§€ì‹œ")
+act <- subset(act, act$label != "ì‹œìŠ¤í…œ")
 
 summary(as.factor(act$label))
 
@@ -91,7 +91,7 @@ colnames(act) <- c("date","time","name","ID",
                     "rank","duty","label")
 
 # 6. mobile
-mob$label <- "¸ğ¹ÙÀÏ"
+mob$label <- "ëª¨ë°”ì¼"
 colnames(mob) <- c("date","time","name","ID",
                    "b_lev","c_lev","d_lev",
                    "rank","duty","label")
