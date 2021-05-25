@@ -10,7 +10,7 @@ library(gdata)
 
 
 ####### Uploading raw data #######
-work_dir1 <- "E:/ÇÐ»ýµ¥ÀÌÅÍ ºÐ¼®/2017/rawdata/processing_rawdata"
+work_dir1 <- "E:/í•™ìƒë°ì´í„° ë¶„ì„/2017/rawdata/processing_rawdata"
 setwd(work_dir1)
 
 LUT_stu <- read.csv("Stu_id_lut.csv")
@@ -39,8 +39,8 @@ rm(attend_21, attend_22)
 ####### preprocessing #######
 
 # lent_space
-lent_space <- sqldf("SELECT lent_space.*, LUT_stu.º¯È¯ÇÐ¹ø FROM lent_space, LUT_stu 
-                    WHERE lent_space.¾ÆÀÌµð = LUT_stu.ÇÐ¹ø")
+lent_space <- sqldf("SELECT lent_space.*, LUT_stu.ë³€í™˜í•™ë²ˆ FROM lent_space, LUT_stu 
+                    WHERE lent_space.ì•„ì´ë”” = LUT_stu.í•™ë²ˆ")
 lent_space <- lent_space[, -c(1,2,5,6,9:14)]
 lent_space[,6] <- paste(lent_space[,1], lent_space[,2]) 
 lent_space <- lent_space[,-c(1,2)]
@@ -50,9 +50,9 @@ colnames(lent_space8) <- c("starttime", "Stu_id", "place")
 colnames(lent_space9) <- c("endtime", "Stu_id", "place")
 
 lent_space8 <- sqldf("SELECT lent_space8.*, LUT_loc.Category_id FROM lent_space8, LUT_loc
-                     WHERE lent_space8.place = LUT_loc.Àå¼Ò¸í")
+                     WHERE lent_space8.place = LUT_loc.ìž¥ì†Œëª…")
 lent_space8 <- sqldf("SELECT lent_space8.*, LUT_loc.Location_id FROM lent_space8, LUT_loc
-                     WHERE lent_space8.place = LUT_loc.Àå¼Ò¸í")
+                     WHERE lent_space8.place = LUT_loc.ìž¥ì†Œëª…")
 lent_space8$Date <- substr(lent_space8$starttime,1,10)
 lent_space8$Time <- substr(lent_space8$starttime,12,19)
 lent_space8$Flag <- 8
@@ -60,9 +60,9 @@ lent_space8 <- lent_space8[,-c(1,3)]
 lent_space8 <- lent_space8[,c(1,4,5,2,3,6)] 
 
 lent_space9 <- sqldf("SELECT lent_space9.*, LUT_loc.Category_id FROM lent_space9, LUT_loc
-                     WHERE lent_space9.place = LUT_loc.Àå¼Ò¸í")
+                     WHERE lent_space9.place = LUT_loc.ìž¥ì†Œëª…")
 lent_space9 <- sqldf("SELECT lent_space9.*, LUT_loc.Location_id FROM lent_space9, LUT_loc
-                     WHERE lent_space9.place = LUT_loc.Àå¼Ò¸í")
+                     WHERE lent_space9.place = LUT_loc.ìž¥ì†Œëª…")
 lent_space9$Date <- substr(lent_space9$endtime,1,10)
 lent_space9$Time <- substr(lent_space9$endtime,12,19)
 lent_space9$Flag <- 9
@@ -77,16 +77,16 @@ rm(lent_space8, lent_space9)
 # IO_lib
 colnames(IO_lib) <- c("Stu_id", "place", "TIME") 
 IO_lib$Date <- substr(IO_lib$TIME,1,10)
-IO_lib_78_3 <- subset(IO_lib, IO_lib$place=='±¹Á¦1ÃþÀÔ±¸1'
-                      | IO_lib$place=='±¹Á¦1ÃþÀÔ±¸2'
-                      | IO_lib$place=='±¹Á¦1ÃþÀÔ±¸3')
-IO_lib_78_2 <- subset(IO_lib, IO_lib$place=='±¹Á¦1ÃþÃâ±¸4'
-                      | IO_lib$place=='±¹Á¦1ÃþÃâ±¸5'
-                      | IO_lib$place=='±¹Á¦1ÃþÃâ±¸6')
-IO_lib_79_3 <- subset(IO_lib, IO_lib$place=='±¹Á¦ÁöÇÏ1Ãþ ÀÔ±¸1'
-                      | IO_lib$place=='±¹Á¦ÁöÇÏ1Ãþ ÀÔ±¸2')
-IO_lib_79_2 <- subset(IO_lib, IO_lib$place=='±¹Á¦ÁöÇÏ1Ãþ Ãâ±¸3'
-                      | IO_lib$place=='±¹Á¦ÁöÇÏ1Ãþ Ãâ±¸4')
+IO_lib_78_3 <- subset(IO_lib, IO_lib$place=='êµ­ì œ1ì¸µìž…êµ¬1'
+                      | IO_lib$place=='êµ­ì œ1ì¸µìž…êµ¬2'
+                      | IO_lib$place=='êµ­ì œ1ì¸µìž…êµ¬3')
+IO_lib_78_2 <- subset(IO_lib, IO_lib$place=='êµ­ì œ1ì¸µì¶œêµ¬4'
+                      | IO_lib$place=='êµ­ì œ1ì¸µì¶œêµ¬5'
+                      | IO_lib$place=='êµ­ì œ1ì¸µì¶œêµ¬6')
+IO_lib_79_3 <- subset(IO_lib, IO_lib$place=='êµ­ì œì§€í•˜1ì¸µ ìž…êµ¬1'
+                      | IO_lib$place=='êµ­ì œì§€í•˜1ì¸µ ìž…êµ¬2')
+IO_lib_79_2 <- subset(IO_lib, IO_lib$place=='êµ­ì œì§€í•˜1ì¸µ ì¶œêµ¬3'
+                      | IO_lib$place=='êµ­ì œì§€í•˜1ì¸µ ì¶œêµ¬4')
 
 IO_lib_78_3$Category_id <- 3
 IO_lib_78_3$Location_id <- 78
@@ -123,7 +123,7 @@ Seat_lib4 <- Seat_lib[,c(1,2,3,5)]
 Seat_lib5 <- Seat_lib[,c(1,2,4,5)]
 
 Seat_lib4 <- sqldf("SELECT Seat_lib4.*, LUT_loc.Location_id FROM Seat_lib4, LUT_loc
-                     WHERE Seat_lib4.place = LUT_loc.Àå¼Ò¸í")
+                     WHERE Seat_lib4.place = LUT_loc.ìž¥ì†Œëª…")
 Seat_lib4$Date <- substr(Seat_lib4$starttime,1,10)
 Seat_lib4$Time <- str_sub(Seat_lib4$starttime,-5,-1)
 Seat_lib4$Time <- paste0(Seat_lib4$Time,":00")
@@ -132,7 +132,7 @@ Seat_lib4 <- Seat_lib4[,-c(2,3)]
 Seat_lib4 <- Seat_lib4[,c(1,4,5,2,3,6)]
 
 Seat_lib5 <- sqldf("SELECT Seat_lib5.*, LUT_loc.Location_id FROM Seat_lib5, LUT_loc
-                     WHERE Seat_lib5.place = LUT_loc.Àå¼Ò¸í")
+                     WHERE Seat_lib5.place = LUT_loc.ìž¥ì†Œëª…")
 Seat_lib5$Date <- substr(Seat_lib5$endtime,1,10)
 Seat_lib5$Time <- str_sub(Seat_lib5$endtime,-5,-1)
 Seat_lib5$Time <- paste0(Seat_lib5$Time,":00")
@@ -151,7 +151,7 @@ Semi_lib6 <- Semi_lib[,c(1,2,3,5)]
 Semi_lib7 <- Semi_lib[,c(1,2,4,5)]
 
 Semi_lib6 <- sqldf("SELECT Semi_lib6.*, LUT_loc.Location_id FROM Semi_lib6, LUT_loc
-                     WHERE Semi_lib6.place = LUT_loc.Àå¼Ò¸í")
+                     WHERE Semi_lib6.place = LUT_loc.ìž¥ì†Œëª…")
 Semi_lib6$Date <- substr(Semi_lib6$starttime,1,10)
 Semi_lib6$Time <- str_sub(Semi_lib6$starttime,-5,-1)
 Semi_lib6$Time <- paste0(Semi_lib6$Time,":00")
@@ -160,7 +160,7 @@ Semi_lib6 <- Semi_lib6[,-c(2,3)]
 Semi_lib6 <- Semi_lib6[,c(1,4,5,2,3,6)]
 
 Semi_lib7 <- sqldf("SELECT Semi_lib7.*, LUT_loc.Location_id FROM Semi_lib7, LUT_loc
-                     WHERE Semi_lib7.place = LUT_loc.Àå¼Ò¸í")
+                     WHERE Semi_lib7.place = LUT_loc.ìž¥ì†Œëª…")
 Semi_lib7$Date <- substr(Semi_lib7$endtime,1,10)
 Semi_lib7$Time <- str_sub(Semi_lib7$endtime,-5,-1)
 Semi_lib7$Time <- paste0(Semi_lib7$Time,":00")
@@ -175,8 +175,8 @@ rm(Semi_lib6, Semi_lib7)
 # attendance
 # tag
 attend2 <- attend2[,-c(1,8)]
-attend2 <- sqldf("SELECT attend2.*, LUT_stu.º¯È¯ÇÐ¹ø FROM attend2, LUT_stu 
-                  WHERE attend2.REG_ID = LUT_stu.ÇÐ¹ø")
+attend2 <- sqldf("SELECT attend2.*, LUT_stu.ë³€í™˜í•™ë²ˆ FROM attend2, LUT_stu 
+                  WHERE attend2.REG_ID = LUT_stu.í•™ë²ˆ")
 attend2 <- attend2[,-6]
 colnames(attend2)[6] <- "Stu_id"
 attend2 <- sqldf("SELECT attend2.*, LUT_class2.ROOM, LUT_class2.CLASS_DT, LUT_class2.STARTTIME, LUT_class2.ENDTIME
@@ -220,23 +220,23 @@ attend2_tag <- attend2_tag[,-c(1:5,8:10)]
 
 attend2_tag$bd <- substr(attend2_tag$ROOM,1,3)
 unique(attend2_tag$bd)
-attend2_tag$Category_id[attend2_tag$bd=="IÁøA"] <- 9
-attend2_tag$Category_id[attend2_tag$bd=="IÀÚA"] <- 4
-attend2_tag$Category_id[attend2_tag$bd=="IÁøD"] <- 12
-attend2_tag$Category_id[attend2_tag$bd=="IÀÚB"] <- 5
-attend2_tag$Category_id[attend2_tag$bd=="IÁ¾3"] <- 6
-attend2_tag$Category_id[attend2_tag$bd=="IÁøB"] <- 10
-attend2_tag$Category_id[attend2_tag$bd=="IÁ¾2"] <- 6
-attend2_tag$Category_id[attend2_tag$bd=="IÁøC"] <- 11
+attend2_tag$Category_id[attend2_tag$bd=="Iì§„A"] <- 9
+attend2_tag$Category_id[attend2_tag$bd=="IìžA"] <- 4
+attend2_tag$Category_id[attend2_tag$bd=="Iì§„D"] <- 12
+attend2_tag$Category_id[attend2_tag$bd=="IìžB"] <- 5
+attend2_tag$Category_id[attend2_tag$bd=="Iì¢…3"] <- 6
+attend2_tag$Category_id[attend2_tag$bd=="Iì§„B"] <- 10
+attend2_tag$Category_id[attend2_tag$bd=="Iì¢…2"] <- 6
+attend2_tag$Category_id[attend2_tag$bd=="Iì§„C"] <- 11
 
-attend2_tag$bd[attend2_tag$bd=="IÁøA"] <- "Áø¸®°üA"
-attend2_tag$bd[attend2_tag$bd=="IÀÚA"] <- "ÀÚÀ¯°üA"
-attend2_tag$bd[attend2_tag$bd=="IÁøD"] <- "Áø¸®°üD"
-attend2_tag$bd[attend2_tag$bd=="IÀÚB"] <- "ÀÚÀ¯°üB"
-attend2_tag$bd[attend2_tag$bd=="IÁ¾3"] <- "Á¾ÇÕ°ü"
-attend2_tag$bd[attend2_tag$bd=="IÁøB"] <- "Áø¸®°üB"
-attend2_tag$bd[attend2_tag$bd=="IÁ¾2"] <- "Á¾ÇÕ°ü"
-attend2_tag$bd[attend2_tag$bd=="IÁøC"] <- "Áø¸®°üC"
+attend2_tag$bd[attend2_tag$bd=="Iì§„A"] <- "ì§„ë¦¬ê´€A"
+attend2_tag$bd[attend2_tag$bd=="IìžA"] <- "ìžìœ ê´€A"
+attend2_tag$bd[attend2_tag$bd=="Iì§„D"] <- "ì§„ë¦¬ê´€D"
+attend2_tag$bd[attend2_tag$bd=="IìžB"] <- "ìžìœ ê´€B"
+attend2_tag$bd[attend2_tag$bd=="Iì¢…3"] <- "ì¢…í•©ê´€"
+attend2_tag$bd[attend2_tag$bd=="Iì§„B"] <- "ì§„ë¦¬ê´€B"
+attend2_tag$bd[attend2_tag$bd=="Iì¢…2"] <- "ì¢…í•©ê´€"
+attend2_tag$bd[attend2_tag$bd=="Iì§„C"] <- "ì§„ë¦¬ê´€C"
 
 attend2_tag_j <- subset(attend2_tag, attend2_tag$Category_id==6)
 attend2_tag_rest <- subset(attend2_tag, attend2_tag$Category_id!=6)
@@ -249,7 +249,7 @@ colnames(attend2_tag)[8] <- "Location_id2"
 attend2_tag <- attend2_tag[,-c(2,6)]
 attend2_tag <- attend2_tag_o
 attend2_tag <- sqldf("SELECT attend2_tag.*, LUT_loc.Location_id FROM attend2_tag, LUT_loc
-                     WHERE attend2_tag.Location_id2 = LUT_loc.Àå¼Ò¸í")
+                     WHERE attend2_tag.Location_id2 = LUT_loc.ìž¥ì†Œëª…")
 attend2_tag <- attend2_tag[,-6]
 attend2_tag <- attend2_tag[,c(1,2,3,5,6,4)]
 
@@ -297,23 +297,23 @@ attend2_rec <- attend2_rec[,-c(1:5,8:10)]
 
 attend2_rec$bd <- substr(attend2_rec$ROOM,1,3)
 unique(attend2_rec$bd)
-attend2_rec$Category_id[attend2_rec$bd=="IÁøA"] <- 9
-attend2_rec$Category_id[attend2_rec$bd=="IÀÚA"] <- 4
-attend2_rec$Category_id[attend2_rec$bd=="IÁ¾3"] <- 6
-attend2_rec$Category_id[attend2_rec$bd=="IÁøB"] <- 10
-attend2_rec$Category_id[attend2_rec$bd=="IÁøD"] <- 12
-attend2_rec$Category_id[attend2_rec$bd=="IÀÚB"] <- 5
-attend2_rec$Category_id[attend2_rec$bd=="IÁøC"] <- 11
-attend2_rec$Category_id[attend2_rec$bd=="IÅ©´ë"] <- 16
+attend2_rec$Category_id[attend2_rec$bd=="Iì§„A"] <- 9
+attend2_rec$Category_id[attend2_rec$bd=="IìžA"] <- 4
+attend2_rec$Category_id[attend2_rec$bd=="Iì¢…3"] <- 6
+attend2_rec$Category_id[attend2_rec$bd=="Iì§„B"] <- 10
+attend2_rec$Category_id[attend2_rec$bd=="Iì§„D"] <- 12
+attend2_rec$Category_id[attend2_rec$bd=="IìžB"] <- 5
+attend2_rec$Category_id[attend2_rec$bd=="Iì§„C"] <- 11
+attend2_rec$Category_id[attend2_rec$bd=="Ií¬ëŒ€"] <- 16
 
-attend2_rec$bd[attend2_rec$bd=="IÁøA"] <- "Áø¸®°üA"
-attend2_rec$bd[attend2_rec$bd=="IÀÚA"] <- "ÀÚÀ¯°üA"
-attend2_rec$bd[attend2_rec$bd=="IÁ¾3"] <- "Á¾ÇÕ°ü"
-attend2_rec$bd[attend2_rec$bd=="IÁøB"] <- "Áø¸®°üB"
-attend2_rec$bd[attend2_rec$bd=="IÁøD"] <- "Áø¸®°üD"
-attend2_rec$bd[attend2_rec$bd=="IÀÚB"] <- "ÀÚÀ¯°üB"
-attend2_rec$bd[attend2_rec$bd=="IÁøC"] <- "Áø¸®°üC"
-attend2_rec$bd[attend2_rec$bd=="IÅ©´ë"] <- "Å©101"
+attend2_rec$bd[attend2_rec$bd=="Iì§„A"] <- "ì§„ë¦¬ê´€A"
+attend2_rec$bd[attend2_rec$bd=="IìžA"] <- "ìžìœ ê´€A"
+attend2_rec$bd[attend2_rec$bd=="Iì¢…3"] <- "ì¢…í•©ê´€"
+attend2_rec$bd[attend2_rec$bd=="Iì§„B"] <- "ì§„ë¦¬ê´€B"
+attend2_rec$bd[attend2_rec$bd=="Iì§„D"] <- "ì§„ë¦¬ê´€D"
+attend2_rec$bd[attend2_rec$bd=="IìžB"] <- "ìžìœ ê´€B"
+attend2_rec$bd[attend2_rec$bd=="Iì§„C"] <- "ì§„ë¦¬ê´€C"
+attend2_rec$bd[attend2_rec$bd=="Ií¬ëŒ€"] <- "í¬101"
 
 attend2_rec_j <- subset(attend2_rec, attend2_rec$Category_id==6)
 attend2_rec_spo <- subset(attend2_rec, attend2_rec$Category_id==16)
@@ -327,7 +327,7 @@ attend2_rec <- rbind(attend2_rec_j, attend2_rec_rest)
 colnames(attend2_rec)[8] <- "Location_id2" 
 attend2_tag_jrest <- attend2_rec
 attend2_rec <- sqldf("SELECT attend2_rec.*, LUT_loc.Location_id FROM attend2_rec, LUT_loc
-                     WHERE attend2_rec.Location_id2 = LUT_loc.Àå¼Ò¸í")
+                     WHERE attend2_rec.Location_id2 = LUT_loc.ìž¥ì†Œëª…")
 attend2_rec$Location_id2 <- NULL
 
 attend2_rec <- rbind(attend2_rec, attend2_rec_spo)
@@ -393,7 +393,7 @@ dorm$cardNo <- NULL
 dorm <- dorm[,c(3,1,2,6,5,4)]
 
 dorm1 <- subset(dorm, substr(dorm$Date,6,7) == "03" | substr(dorm$Date,6,7) == "04" |
-                  substr(dorm$Date,6,7) == "05" | substr(dorm$Date,6,7) == "06") # 1ÇÐ±â
+                  substr(dorm$Date,6,7) == "05" | substr(dorm$Date,6,7) == "06") # 1í•™ê¸°
 dorm2 <- subset(dorm, substr(dorm$Date,6,7) == "09" | substr(dorm$Date,6,7) == "10" |
                   substr(dorm$Date,6,7) == "11" | substr(dorm$Date,6,7) == "12") 
 dorm_name1 <- data.frame(unique(dorm1$name),unique(dorm1$name))
@@ -401,27 +401,27 @@ dorm_name2 <- data.frame(unique(dorm2$name),unique(dorm2$name))
 colnames(dorm_name1) <- c("origin", "converted")
 colnames(dorm_name2) <- c("origin", "converted")
 
-dorm_name1 <- subset(dorm_name1, substr(dorm_name1$origin,1,2) == "¼Ûµµ")
-dorm_name2 <- subset(dorm_name2, substr(dorm_name2$origin,1,2) == "¼Ûµµ")
+dorm_name1 <- subset(dorm_name1, substr(dorm_name1$origin,1,2) == "ì†¡ë„")
+dorm_name2 <- subset(dorm_name2, substr(dorm_name2$origin,1,2) == "ì†¡ë„")
 
-dorm_name1$converted <- gsub("¼Ûµµ 1ÇÐ»ç", "", dorm_name1$converted)
-dorm_name1$converted <- gsub("¼Ûµµ 2ÇÐ»ç", "", dorm_name1$converted)
-dorm_name1$converted <- gsub("¼Ûµµ1ÇÐ»ç", "", dorm_name1$converted)
-dorm_name1$converted <- gsub("¼Ûµµ2ÇÐ»ç", "", dorm_name1$converted)
-dorm_name1$converted <- gsub("¼ÛµµÇÐ»ç", "", dorm_name1$converted)
-dorm_name1$converted <- gsub("¼ÛµµÇÐ¼­", "", dorm_name1$converted)
-dorm_name1$converted <- gsub("µ¿", "", dorm_name1$converted)
-dorm_name1$converted <- gsub("È£", "", dorm_name1$converted)
+dorm_name1$converted <- gsub("ì†¡ë„ 1í•™ì‚¬", "", dorm_name1$converted)
+dorm_name1$converted <- gsub("ì†¡ë„ 2í•™ì‚¬", "", dorm_name1$converted)
+dorm_name1$converted <- gsub("ì†¡ë„1í•™ì‚¬", "", dorm_name1$converted)
+dorm_name1$converted <- gsub("ì†¡ë„2í•™ì‚¬", "", dorm_name1$converted)
+dorm_name1$converted <- gsub("ì†¡ë„í•™ì‚¬", "", dorm_name1$converted)
+dorm_name1$converted <- gsub("ì†¡ë„í•™ì„œ", "", dorm_name1$converted)
+dorm_name1$converted <- gsub("ë™", "", dorm_name1$converted)
+dorm_name1$converted <- gsub("í˜¸", "", dorm_name1$converted)
 dorm_name1$converted <- gsub(" ", "", dorm_name1$converted)
 
-dorm_name2$converted <- gsub("¼Ûµµ 1ÇÐ»ç", "", dorm_name2$converted)
-dorm_name2$converted <- gsub("¼Ûµµ 2ÇÐ»ç", "", dorm_name2$converted)
-dorm_name2$converted <- gsub("¼Ûµµ1ÇÐ»ç", "", dorm_name2$converted)
-dorm_name2$converted <- gsub("¼Ûµµ2ÇÐ»ç", "", dorm_name2$converted)
-dorm_name2$converted <- gsub("¼ÛµµÇÐ»ç", "", dorm_name2$converted)
-dorm_name2$converted <- gsub("¼ÛµµÇÐ¼­", "", dorm_name2$converted)
-dorm_name2$converted <- gsub("µ¿", "", dorm_name2$converted)
-dorm_name2$converted <- gsub("È£", "", dorm_name2$converted)
+dorm_name2$converted <- gsub("ì†¡ë„ 1í•™ì‚¬", "", dorm_name2$converted)
+dorm_name2$converted <- gsub("ì†¡ë„ 2í•™ì‚¬", "", dorm_name2$converted)
+dorm_name2$converted <- gsub("ì†¡ë„1í•™ì‚¬", "", dorm_name2$converted)
+dorm_name2$converted <- gsub("ì†¡ë„2í•™ì‚¬", "", dorm_name2$converted)
+dorm_name2$converted <- gsub("ì†¡ë„í•™ì‚¬", "", dorm_name2$converted)
+dorm_name2$converted <- gsub("ì†¡ë„í•™ì„œ", "", dorm_name2$converted)
+dorm_name2$converted <- gsub("ë™", "", dorm_name2$converted)
+dorm_name2$converted <- gsub("í˜¸", "", dorm_name2$converted)
 dorm_name2$converted <- gsub(" ", "", dorm_name2$converted)
 
 dorm_name1 <- sqldf("SELECT dorm_name1.*, dorm_list_1.Stu_id FROM dorm_name1, dorm_list_1
@@ -437,16 +437,16 @@ dorm <- dorm[,c(6,1,2,3,4,5)]
 write.csv(dorm, "dorm_2017.csv")
 
 # fitness
-setwd("E:/ÇÐ»ýµ¥ÀÌÅÍ ºÐ¼®/2017/rawdata/6. ÈÖÆ®´Ï½º_ÃâÀÔ±â·Ï(180524 ¼ö·É)/2017³â ÀÔÀå³»¿ª/2017³â ÀÔÀå³»¿ª/csv")
+setwd("E:/í•™ìƒë°ì´í„° ë¶„ì„/2017/rawdata/6. íœ˜íŠ¸ë‹ˆìŠ¤_ì¶œìž…ê¸°ë¡(180524 ìˆ˜ë ¹)/2017ë…„ ìž…ìž¥ë‚´ì—­/2017ë…„ ìž…ìž¥ë‚´ì—­/csv")
 
-fit1 <- read.csv("2017_12¿ù.csv")
-fit1$È¸¿ø¸í <- NULL
-fit1$ÈÞ´ëÆù <- NULL
-fit1$°­½À¸í <- NULL
-fit1$Ãâ¼®È½¼ö <- NULL
-fit1$³ªÀÌ <- NULL
-fit1$Stu_id <- as.character(fit1$Ä«µå¹øÈ£)
-fit1$Ä«µå¹øÈ£ <- NULL
+fit1 <- read.csv("2017_12ì›”.csv")
+fit1$íšŒì›ëª… <- NULL
+fit1$íœ´ëŒ€í° <- NULL
+fit1$ê°•ìŠµëª… <- NULL
+fit1$ì¶œì„íšŸìˆ˜ <- NULL
+fit1$ë‚˜ì´ <- NULL
+fit1$Stu_id <- as.character(fit1$ì¹´ë“œë²ˆí˜¸)
+fit1$ì¹´ë“œë²ˆí˜¸ <- NULL
 
 for (r in 1:nrow(fit1)){
   if (substr(fit1$Stu_id[r],1,1)=="0"){
@@ -454,7 +454,7 @@ for (r in 1:nrow(fit1)){
   }
 }
 
-fit1 <- sqldf("SELECT fit1.*, LUT_stu.º¯È¯ÇÐ¹ø FROM fit1, LUT_stu WHERE fit1.Stu_id = LUT_stu.ÇÐ¹ø")
+fit1 <- sqldf("SELECT fit1.*, LUT_stu.ë³€í™˜í•™ë²ˆ FROM fit1, LUT_stu WHERE fit1.Stu_id = LUT_stu.í•™ë²ˆ")
 fit1$Stu_id <- fit1[,ncol(fit1)]
 fit1[,ncol(fit1)] <- NULL
 
@@ -495,7 +495,7 @@ write.csv(FITNESS, "fitness_2017.csv")
 all_data_2017 <- rbind(attend1_rec, attend1_tag, attend2_rec, attend2_tag,
                         dorm,fitness,IO_lib,lent_space,Seat_lib,Semi_lib)
 
-setwd("E:/ÇÐ»ýµ¥ÀÌÅÍ ºÐ¼®")
+setwd("E:/í•™ìƒë°ì´í„° ë¶„ì„")
 write.csv(all_data_2017, "all_data(2017_1,2).csv")
 
 # SSO
@@ -512,18 +512,18 @@ sso <- subset(sso, substr(sso$ip,1,2) == "1." | substr(sso$ip,1,4) == "172.")
 
 sso <- subset(sso, substr(sso$ip,1,6) == "1.233." | substr(sso$ip,1,6) == "172.20" | substr(sso$ip,1,6) == "172.21")
 
-sso$bd[substr(sso$ip,7,9) == "206"| substr(sso$ip,7,9) == "207"|substr(sso$ip,7,9) == "208"] <- "ÆÄ¿öÇÃ·£Æ®" 
-sso$bd[substr(sso$ip,7,9) == "209"] <- "Á¾ÇÕ°ü" 
-sso$bd[substr(sso$ip,7,9) == "210" | substr(sso$ip,7,9) == "211"] <- "ÀÚÀ¯°üA" 
-sso$bd[substr(sso$ip,7,9) == "212" | substr(sso$ip,7,9) == "213"] <- "ÀÚÀ¯°üB" 
+sso$bd[substr(sso$ip,7,9) == "206"| substr(sso$ip,7,9) == "207"|substr(sso$ip,7,9) == "208"] <- "íŒŒì›Œí”ŒëžœíŠ¸" 
+sso$bd[substr(sso$ip,7,9) == "209"] <- "ì¢…í•©ê´€" 
+sso$bd[substr(sso$ip,7,9) == "210" | substr(sso$ip,7,9) == "211"] <- "ìžìœ ê´€A" 
+sso$bd[substr(sso$ip,7,9) == "212" | substr(sso$ip,7,9) == "213"] <- "ìžìœ ê´€B" 
 
-sso$bd[substr(sso$ip,7,9) == "214" | substr(sso$ip,7,9) == "215"] <- "Áø¸®°üA" 
-sso$bd[substr(sso$ip,7,9) == "216" | substr(sso$ip,7,9) == "217"] <- "Áø¸®°üB" 
-sso$bd[substr(sso$ip,7,9) == "218" | substr(sso$ip,7,9) == "219"] <- "Áø¸®°üC" 
-sso$bd[substr(sso$ip,7,9) == "220" | substr(sso$ip,7,9) == "221"] <- "Áø¸®°üD" 
+sso$bd[substr(sso$ip,7,9) == "214" | substr(sso$ip,7,9) == "215"] <- "ì§„ë¦¬ê´€A" 
+sso$bd[substr(sso$ip,7,9) == "216" | substr(sso$ip,7,9) == "217"] <- "ì§„ë¦¬ê´€B" 
+sso$bd[substr(sso$ip,7,9) == "218" | substr(sso$ip,7,9) == "219"] <- "ì§„ë¦¬ê´€C" 
+sso$bd[substr(sso$ip,7,9) == "220" | substr(sso$ip,7,9) == "221"] <- "ì§„ë¦¬ê´€D" 
 
 sso$bd[substr(sso$ip,7,9) == "222" | substr(sso$ip,7,9) == "223" |
-       substr(sso$ip,7,9) == "224" | substr(sso$ip,7,9) == "225"] <- "¾ð´õ¿ìµå±â³äµµ¼­°ü" 
+       substr(sso$ip,7,9) == "224" | substr(sso$ip,7,9) == "225"] <- "ì–¸ë”ìš°ë“œê¸°ë…ë„ì„œê´€" 
 
 sso$bd[substr(sso$ip,7,9) == "228" | substr(sso$ip,7,9) == "229" |
        substr(sso$ip,7,9) == "230"] <- "D" 
@@ -548,7 +548,7 @@ rm(sso_NA)
 unique(sso$bd)
 
 sso_o <- sso
-sso <- sqldf("SELECT sso.*, LUT_loc.* FROM sso, LUT_loc WHERE sso.bd = LUT_loc.Àå¼Ò¸í")
+sso <- sqldf("SELECT sso.*, LUT_loc.* FROM sso, LUT_loc WHERE sso.bd = LUT_loc.ìž¥ì†Œëª…")
 sso <- sso[,-c(2,5,6,8)]
 sso <- sso[,c(1:3,5,4)]
 sso$Flag <- 11
