@@ -44,9 +44,9 @@ useSejongDic()
 for(i in 1:max(range(data$label))){
   
   data <- data_o[data_o$label==i,]
-  data <- data$È°µ¿³»¿ë
+  data <- data$í™œë™ë‚´ìš©
   
-  nouns <- extractNoun(data) # ¸í»ç ÃßÃâ
+  nouns <- extractNoun(data) # ëª…ì‚¬ ì¶”ì¶œ
   
   wordCount <- table(unlist(nouns))
   df_word <- as.data.frame(wordCount, stringAsFactors = F) 
@@ -56,7 +56,7 @@ for(i in 1:max(range(data$label))){
   
   
   pal <- brewer.pal(8, "Dark2")   # Dark2 
-  set.seed(1234)  # ³­¼ö °íÁ¤
+  set.seed(1234)  # ë‚œìˆ˜ ê³ ì •
   png(paste0('wordCloud_',i,'.png'),width = 2000, height = 1500)
   wordcloud(words = df_word$word, freq = df_word$Freq, min.freq = 2, max.words = 75, 
             random.order = F, rot.per = .1, scale = c(4, 0.3), colors = pal)
